@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Serif+Display&display=swap");
+
+.skills-page {
+    background: radial-gradient(900px 450px at 15% -10%, rgba(0, 180, 255, 0.2), transparent 55%),
+        radial-gradient(900px 450px at 100% 0%, rgba(0, 119, 255, 0.18), transparent 60%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0));
+    min-height: 100vh;
+    color: var(--text-color);
+}
+
+.skills-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 20px 40px;
+}
+
+.skills-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
+}
+
+.skills-eyebrow {
+    font-family: "Space Grotesk", sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.skills-title {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    color: var(--primary-color);
+}
+
+.skills-lede {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.skills-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.skills-btn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: "Space Grotesk", sans-serif;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.skills-btn.primary {
+    background: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.skills-btn:hover {
+    transform: translateY(-2px);
+}
+
+.skills-highlight {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.highlight-card h3 {
+    margin: 0 0 14px;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.pill-row span {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.9rem;
+}
+
+.pill-row.muted span {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.highlight-note {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+}
+
+.section-title {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    margin: 40px 0 20px;
+    color: var(--primary-color);
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.skills-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.skills-card:hover {
+    transform: translateY(-4px);
+}
+
+.skills-card h4 {
+    margin: 10px 0 6px;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.skills-card p {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+}
+
+.skills-icon {
+    font-size: 2rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.skills-columns {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px;
+    margin-top: 30px;
+    align-items: stretch;
+}
+
+.steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+}
+
+.steps li {
+    background: var(--card-bg);
+    padding: 12px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.skills-panel {
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.2), rgba(0, 119, 255, 0.12));
+    border-radius: 18px;
+    padding: 18px;
+    border: 1px solid rgba(0, 180, 255, 0.22);
+}
+
+.skills-panel h3 {
+    margin: 0 0 10px;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.skills-panel p {
+    margin: 0 0 12px;
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+}
+
+.skills-cta {
+    margin-top: 40px;
+    padding: 26px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.22), rgba(0, 119, 255, 0.12));
+    border: 1px solid rgba(0, 180, 255, 0.25);
+    text-align: center;
+}
+
+.skills-cta h3 {
+    font-family: "DM Serif Display", serif;
+    margin: 0 0 8px;
+}
+
+.skills-cta p {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+}
+
+@media (max-width: 900px) {
+    .skills-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}

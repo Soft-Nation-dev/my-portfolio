@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
 import logo from '../../assets/images/logo.jpg';
 
 export default function Navbar({ toggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const links = ['About', 'Skills', 'Projects', 'Testimonials','Contact'];
 
@@ -27,11 +30,52 @@ export default function Navbar({ toggleTheme }) {
         </div>
 
         <div className="desktop-links">
-          {links.map((link) => (
-            <a href={`#${link.toLowerCase()}`} key={link} className="nav-link">
-              {link}
-            </a>
-          ))}
+          {links.map((link) => {
+            if (link === 'Projects') {
+              return (
+                <Link to="/projects" key={link} className="nav-link">
+                  {link}
+                </Link>
+              );
+            }
+            if (link === 'About') {
+              return (
+                <Link to="/about" key={link} className="nav-link">
+                  {link}
+                </Link>
+              );
+            }
+            if (link === 'Skills') {
+              return (
+                <Link to="/skills" key={link} className="nav-link">
+                  {link}
+                </Link>
+              );
+            }
+            if (link === 'Contact') {
+              return (
+                <Link to="/contact" key={link} className="nav-link">
+                  {link}
+                </Link>
+              );
+            }
+            if (link === 'Testimonials') {
+              return (
+                <Link to="/testimonials" key={link} className="nav-link">
+                  {link}
+                </Link>
+              );
+            }
+            return isHomePage ? (
+              <a href={`#${link.toLowerCase()}`} key={link} className="nav-link">
+                {link}
+              </a>
+            ) : (
+              <Link to={`/#${link.toLowerCase()}`} key={link} className="nav-link">
+                {link}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="controls">
@@ -64,17 +108,100 @@ export default function Navbar({ toggleTheme }) {
               <FaTimes size={24} />
             </button>
           </div>
+          <div className="menu-preview">
+            <p className="menu-preview-eyebrow">Navigate</p>
+            <h3 className="menu-preview-title">Choose your next stop</h3>
+            <p className="menu-preview-text">
+              Fast access to projects, skills, and the latest collaborations.
+            </p>
+            <div className="menu-preview-chips">
+              <span>Portfolio</span>
+              <span>Skills</span>
+              <span>Contact</span>
+            </div>
+          </div>
           <div className="menu-links">
-            {links.map((link) => (
-              <a
-                href={`#${link.toLowerCase()}`}
-                key={link}
-                className="mobile-nav-link"
-                onClick={() => setMenuOpen(false)}
-              >
-                {link}
-              </a>
-            ))}
+            {links.map((link) => {
+              if (link === 'Projects') {
+                return (
+                  <Link
+                    to="/projects"
+                    key={link}
+                    className="mobile-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link}
+                  </Link>
+                );
+              }
+              if (link === 'About') {
+                return (
+                  <Link
+                    to="/about"
+                    key={link}
+                    className="mobile-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link}
+                  </Link>
+                );
+              }
+              if (link === 'Skills') {
+                return (
+                  <Link
+                    to="/skills"
+                    key={link}
+                    className="mobile-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link}
+                  </Link>
+                );
+              }
+              if (link === 'Contact') {
+                return (
+                  <Link
+                    to="/contact"
+                    key={link}
+                    className="mobile-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link}
+                  </Link>
+                );
+              }
+              if (link === 'Testimonials') {
+                return (
+                  <Link
+                    to="/testimonials"
+                    key={link}
+                    className="mobile-nav-link"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link}
+                  </Link>
+                );
+              }
+              return isHomePage ? (
+                <a
+                  href={`#${link.toLowerCase()}`}
+                  key={link}
+                  className="mobile-nav-link"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link}
+                </a>
+              ) : (
+                <Link
+                  to={`/#${link.toLowerCase()}`}
+                  key={link}
+                  className="mobile-nav-link"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link}
+                </Link>
+              );
+            })}
           </div>
         </div>
         <div className="backdrop" onClick={() => setMenuOpen(false)} />

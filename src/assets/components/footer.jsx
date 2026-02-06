@@ -4,7 +4,7 @@ import '../styles/Footer.css';
 
 export default function Footer() {
   return (
-    <footer className="footer" data-aos="fade-up">
+    <footer className="footer">
       <div className="footer-content">
         <h2 className="footer-logo">softnation.dev</h2>
         

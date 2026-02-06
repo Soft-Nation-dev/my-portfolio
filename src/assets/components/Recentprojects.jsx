@@ -1,62 +1,218 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import '../styles/Recentproject.css';
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import ReactDOM from "react-dom";
+import "aos/dist/aos.css";
+import "../styles/Recentproject.css";
+import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
+import { Link } from "react-router-dom";
+import { recentProjects } from "../../project/projectData";
 
-const projectData = [
-  {
-    id: 1,
-    
-    title: "Divine Grace UNEC Church Site",
-    description: `A welcoming and spiritual website built for Divine Grace UNEC using HTML, 
-    CSS & JS. It highlights the church’s values, services, vision
-    , and contact information in a clean and responsive design.`,
-    type: "video",
-    media: "/media/DIVINE-GRACE-UNEC WEBPAGE VIDEO.webm"
-  },
-  {
-    id: 2,
-      title: "Amazon Clone",
-    description: `A frontend recreation of Amazon‘s key user interface using HTML,
-     CSS & JS—featuring product browsing,
-     a search bar, and responsive layout.`,
-    mediaType: "video",
-    media: "/media/Amazon-Project.webm"
-  },
-];
 
 const RecentProjects = () => {
+  const [activeProjectIndex, setActiveProjectIndex] = useState(null);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(0);
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
-  const latestProjects = projectData.slice(0, 2);
+  useEffect(() => {
+    const handleBackButton = (e) => {
+      if (activeProjectIndex !== null) {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+
+    if (activeProjectIndex !== null) {
+      window.history.pushState(null, null, window.location.pathname);
+    }
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [activeProjectIndex]);
+
+
+  const openModal = (projectIndex, mediaIndex = 0) => {
+    setActiveProjectIndex(projectIndex);
+    setActiveMediaIndex(mediaIndex);
+    //  document.body.style.overflow = 'hidden'; // prevent background scroll
+      setTimeout(() => {
+        const modal = document.querySelector('.project-modal');
+        if (modal && window.innerWidth > 768) modal.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 50);
+  };
+
+  const closeModal = () => {
+    setActiveProjectIndex(null);
+    setActiveMediaIndex(0);
+    // document.body.style.overflow = 'auto';
+  };
+
+  const nextMedia = () => {
+    const project = recentProjects[activeProjectIndex];
+    const totalMedia = project.images.length + (project.video ? 1 : 0);
+    setActiveMediaIndex((prev) => (prev + 1) % totalMedia);
+  };
+
+  const prevMedia = () => {
+    const project = recentProjects[activeProjectIndex];
+    const totalMedia = project.images.length + (project.video ? 1 : 0);
+    setActiveMediaIndex((prev) => (prev - 1 + totalMedia) % totalMedia);
+  };
 
   return (
     <section className="recent-projects" id="projects">
-      <h2 className="projects-title" data-aos="fade-up">Recent Projects</h2>
+      <h2 className="projects-title" data-aos="fade-up">
+        Recent Projects
+      </h2>
 
       <div className="projects-container">
-        {latestProjects.map((project) => (
-          <div key={project.id} className="project-card" data-aos="fade-up">
-            {project.type === 'image' ? (
-              <img src={project.media} alt={project.title} className="project-media" />
-            ) : (
-              <video src={project.media} controls className="project-media" />
+        {recentProjects.map((project, projectIndex) => {
+          const displayedImagesCount = 2;
+          const totalImages = project.images.length;
+          const undisplayedCount = totalImages > displayedImagesCount ? totalImages - displayedImagesCount : 0;
+
+          return (
+          <div
+          key={project.id}
+          className={`project-card ${project.size}`}
+          data-aos="fade-up"
+          >
+        <div className="project-collage">
+            {project.video && (
+              <div
+                className="media-wrapper video video-full"
+                onClick={() => openModal(projectIndex, totalImages)}
+              >
+                <video
+                  src={project.video}
+                  muted
+                  loop
+                  autoPlay
+                  playsInline
+                  className="media-element"
+                />
+              </div>
             )}
-            <div className="project-content">
+            
+            <div className="images-row">
+              {project.images.slice(0, 2).map((img, imgIndex) => (
+                <div
+                  key={imgIndex}
+                  className={`media-wrapper image-wrapper ${imgIndex === 0 ? 'image-large' : 'image-small'}`}
+                  onClick={() => openModal(projectIndex, imgIndex)}
+                >
+                  <img
+                    src={img}
+                    alt={`${project.title} ${imgIndex + 1}`}
+                    className="media-element"
+                  />
+                  
+                  {imgIndex === 1 && undisplayedCount > 0 && (
+                    <div className="undisplayed-badge">
+                      +{undisplayedCount}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+  </div>
+        <div className="project-overlay">
               <h3>{project.title}</h3>
               <p>{project.description}</p>
             </div>
           </div>
-        ))}
+        );
+        })}
       </div>
 
-      <div className="view-all-container" data-aos="fade-up">
-        <button className="view-all-btn">View All Projects</button>
+      <div className="view-all-container">
+        <Link to="/projects" className="view-all-btn">
+          View All Projects
+        </Link>
       </div>
+
+        {activeProjectIndex !== null &&
+  ReactDOM.createPortal(
+    <div className="project-modal" onClick={closeModal}>
+      <div
+        className="modal-content"
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => setTouchStartX(e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          const touchEndX = e.changedTouches[0].clientX;
+          if (touchStartX - touchEndX > 50) nextMedia();
+          if (touchEndX - touchStartX > 50) prevMedia();
+        }}
+      >
+        <button className="modal-close" onClick={closeModal}>
+          <X size={30} />
+        </button>
+
+        <h3>{recentProjects[activeProjectIndex].title}</h3>
+
+        {(() => {
+          const project = recentProjects[activeProjectIndex];
+          const totalImages = project.images.length;
+          const isVideo = project.video && activeMediaIndex === totalImages;
+
+          return isVideo ? (
+            <video
+              src={project.video}
+              controls
+              autoPlay
+              loop
+              className="modal-media"
+            />
+          ) : (
+            <img
+              src={project.images[activeMediaIndex]}
+              alt={project.title}
+              className="modal-media"
+            />
+          );
+        })()}
+
+        <div className="modal-dots mobile-dots">
+          {(() => {
+            const project = recentProjects[activeProjectIndex];
+            const totalMedia =
+              project.images.length + (project.video ? 1 : 0);
+            return Array.from({ length: totalMedia }).map((_, i) => (
+              <span
+                key={i}
+                className={`dot ${i === activeMediaIndex ? "active" : ""}`}
+                onClick={() => setActiveMediaIndex(i)}
+              />
+            ));
+          })()}
+        </div>
+
+        <p>{recentProjects[activeProjectIndex].description}</p>
+
+        <div className="modal-nav desktop-nav">
+          <button className="nav-btn" onClick={prevMedia}>
+            <ChevronLeft size={22} />
+          </button>
+
+          <button className="nav-btn" onClick={nextMedia}>
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.getElementById("modal-root")
+  )}
+
+
+
     </section>
   );
 };
 
-export default RecentProjects
+export default RecentProjects;

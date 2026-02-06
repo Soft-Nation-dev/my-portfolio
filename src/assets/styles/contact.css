@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fraunces:wght@600&display=swap");
+
+.contact-page {
+    background: radial-gradient(900px 500px at 5% -10%, rgba(0, 180, 255, 0.2), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(0, 119, 255, 0.16), transparent 60%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0));
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.contact-shell {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 96px 20px 40px;
+}
+
+.contact-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    align-items: center;
+}
+
+.contact-eyebrow {
+    font-family: "Space Grotesk", sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.contact-title {
+    font-family: "Fraunces", serif;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    color: var(--primary-color);
+}
+
+.contact-lede {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: "Space Grotesk", sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.contact-btn.primary {
+    background: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+}
+
+.contact-panel {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.contact-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card + .contact-card {
+    margin-top: 16px;
+}
+
+.contact-card h3 {
+    margin: 0 0 8px;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.contact-number {
+    font-family: "Fraunces", serif;
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+}
+
+.contact-note {
+    color: var(--text-secondary);
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.contact-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.contact-chips span {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 0.85rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 32px;
+}
+
+.contact-grid .contact-card {
+    height: 100%;
+
+}
+
+.contact-icon {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.contact-card h4 {
+    margin: 0 0 8px;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.contact-card p {
+    margin: 0 0 12px;
+    color: var(--text-secondary);
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.contact-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.contact-socials {
+    display: flex;
+    gap: 12px;
+    font-size: 1.4rem;
+}
+
+.contact-socials a {
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.contact-socials a:hover {
+    color: var(--primary-color);
+}
+
+.contact-cta {
+    margin-top: 70px;
+    padding: 26px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(0, 180, 255, 0.2), rgba(0, 119, 255, 0.12));
+    border: 1px solid rgba(0, 180, 255, 0.25);
+    text-align: center;
+}
+
+.contact-cta h3 {
+    font-family: "Fraunces", serif;
+    margin: 0 0 8px;
+}
+
+.contact-cta p {
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+}
+
+@media (max-width: 900px) {
+    .contact-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

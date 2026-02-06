@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://soft-nation-dev.github.io/my-portfolio/",
+  "homepage": "https://Soft-Nation-dev.github.io/my-portfolio/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "aos": "^2.3.4",
+    "lucide-react": "^0.545.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
+    "react-router-dom": "^7.9.4",
     "react-tilt": "^1.0.2",
     "typewriter-effect": "^2.22.0"
   },
